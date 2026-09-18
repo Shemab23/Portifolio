@@ -1,12 +1,40 @@
+<div align="center">
+
+<img src="./public/images/favicon.svg" alt="Bruno Shema Logo" width="96" height="96" />
+
 # Bruno Shema — Personal Portfolio
 
-> **From software ideas to working systems.**
+**From software ideas to working systems.**
+
+[![Live Site](https://img.shields.io/badge/Live-Portfolio-1c1917?style=flat-square)](#portfolio)
+[![Built with](https://img.shields.io/badge/Built%20with-React%20%2B%20Tailwind-a37f55?style=flat-square)](#technical-foundation)
+[![License](https://img.shields.io/badge/License-MIT-7a6f5d?style=flat-square)](#)
+
+</div>
+
+---
 
 This repository contains the personal portfolio of **Bruno Shema**, a Software Engineer focused on building practical software, understanding systems, and exploring the intersection of **software engineering, AI, and intelligent systems**.
 
-The portfolio is more than a collection of projects.
+The portfolio is more than a collection of Vprojects.
 
 It is a representation of how I think, what I build, what I am learning, and where I am heading.
+
+## Table of Contents
+
+- [Bruno Shema — Personal Portfolio](#bruno-shema--personal-portfolio)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [What This Portfolio Represents](#what-this-portfolio-represents)
+  - [Selected Work](#selected-work)
+  - [Technical Foundation](#technical-foundation)
+  - [Engineering Philosophy](#engineering-philosophy)
+  - [Education](#education)
+  - [Beyond Code](#beyond-code)
+  - [The Direction](#the-direction)
+  - [Portfolio](#portfolio)
+  - [Development](#development)
+  - [Author](#author)
 
 ---
 
@@ -20,19 +48,19 @@ My current foundation is in **Software Engineering**, with experience across pro
 
 I am also actively exploring how **AI can change the way software is designed and built**, while developing a longer-term interest in:
 
-* Artificial Intelligence
-* Edge AI
-* TinyML
-* Embedded Systems
-* IoT
-* Robotics
-* Automation
-* Intelligent Systems
-* Energy-efficient computing
+- Artificial Intelligence
+- Edge AI
+- TinyML
+- Embedded Systems
+- IoT
+- Robotics
+- Automation
+- Intelligent Systems
+- Energy-efficient computing
 
 The direction is simple:
 
-**Build useful software today. Understand intelligent systems tomorrow.**
+> **Build useful software today. Understand intelligent systems tomorrow.**
 
 ---
 
@@ -40,23 +68,11 @@ The direction is simple:
 
 This portfolio was designed around three principles.
 
-### 01 — Build
-
-Ideas become valuable when they become real.
-
-The projects presented here represent my practical experience turning concepts, requirements, and problems into working software.
-
-### 02 — Think
-
-Good engineering is not just about making something work.
-
-It is about understanding **why** it should work, how its components fit together, what trade-offs exist, and how the system can evolve.
-
-### 03 — Keep Exploring
-
-Technology does not stand still, and neither should an engineer.
-
-My current exploration into AI, Edge AI, embedded systems, IoT, robotics, and automation represents the next stage of my development.
+| # | Principle | Description |
+|---|---|---|
+| 01 | **Build** | Ideas become valuable when they become real. The projects presented here represent my practical experience turning concepts, requirements, and problems into working software. |
+| 02 | **Think** | Good engineering is not just about making something work. It is about understanding **why** it should work, how its components fit together, what trade-offs exist, and how the system can evolve. |
+| 03 | **Keep Exploring** | Technology does not stand still, and neither should an engineer. My current exploration into AI, Edge AI, embedded systems, IoT, robotics, and automation represents the next stage of my development. |
 
 ---
 
@@ -64,24 +80,19 @@ My current exploration into AI, Edge AI, embedded systems, IoT, robotics, and au
 
 The portfolio showcases projects across different areas of software engineering, including:
 
-### Software Development
-
+**Software Development**
 Building practical applications from defined problems and requirements.
 
-### Database Systems
-
+**Database Systems**
 Working with relational databases, SQL, data structures, and application-level data management.
 
-### System Design
-
+**System Design**
 Thinking about architecture, requirements, feasibility, components, and how different parts of a system work together.
 
-### AI-Assisted Development
-
+**AI-Assisted Development**
 Exploring how modern AI tools can accelerate research, prototyping, development, debugging, and iteration while keeping engineering judgement at the centre of the process.
 
-### Intelligent Systems
-
+**Intelligent Systems**
 Exploring the connection between software, AI, hardware, devices, and the physical world.
 
 ---
@@ -90,44 +101,59 @@ Exploring the connection between software, AI, hardware, devices, and the physic
 
 My development toolkit continues to evolve, but my foundation includes:
 
-**Languages**
+<table>
+<tr>
+<td valign="top" width="20%">
 
-* TypeScript
-* JavaScript
-* Python
-* Java
-* C
-* C++
-* SQL
-* HTML
-* CSS
+**Languages**
+- TypeScript
+- JavaScript
+- Python
+- Java
+- C
+- C++
+- SQL
+- HTML
+- CSS
+
+</td>
+<td valign="top" width="20%">
 
 **Frontend**
+- React
+- Next.js
+- Tailwind CSS
 
-* React
-* Next.js
-* Tailwind CSS
+</td>
+<td valign="top" width="20%">
 
 **Backend**
+- Node.js
+- Express
+- FastAPI
 
-* Node.js
-* Express
-* FastAPI
+</td>
+<td valign="top" width="20%">
 
 **Databases**
+- PostgreSQL
+- MySQL
+- SQLite
 
-* PostgreSQL
-* MySQL
-* SQLite
+</td>
+<td valign="top" width="20%">
 
-**Tools & Infrastructure**
+**Tools & Infra**
+- Git
+- Docker
+- Vercel
+- Cloudinary
+- Cloudflare
+- VS Code
 
-* Git
-* Docker
-* Vercel
-* Cloudinary
-* Cloudflare
-* VS Code
+</td>
+</tr>
+</table>
 
 The technologies matter, but the ability to understand and solve the underlying problem matters more.
 
@@ -135,25 +161,11 @@ The technologies matter, but the ability to understand and solve the underlying 
 
 ## Engineering Philosophy
 
-### Understand before building.
-
-A clear problem is easier to solve than a vague one.
-
-### Choose technology with purpose.
-
-The newest technology is not automatically the right technology.
-
-### Keep systems understandable.
-
-Complexity should be introduced when it provides real value, not simply because it is possible.
-
-### Use AI thoughtfully.
-
-AI can accelerate software development, but generated output still needs to be understood, evaluated, tested, and improved.
-
-### Build, learn, iterate.
-
-Every project is an opportunity to improve both the product and the engineer behind it.
+- **Understand before building.** A clear problem is easier to solve than a vague one.
+- **Choose technology with purpose.** The newest technology is not automatically the right technology.
+- **Keep systems understandable.** Complexity should be introduced when it provides real value, not simply because it is possible.
+- **Use AI thoughtfully.** AI can accelerate software development, but generated output still needs to be understood, evaluated, tested, and improved.
+- **Build, learn, iterate.** Every project is an opportunity to improve both the product and the engineer behind it.
 
 ---
 
@@ -161,17 +173,16 @@ Every project is an opportunity to improve both the product and the engineer beh
 
 **B.Sc. Software Engineering**
 European University of Lefke
-
 **CGPA: 3.78 / 4.00**
 
 Relevant areas of study include:
 
-* Data Structures & Algorithms
-* Object-Oriented Programming
-* Software Design & Architecture
-* Software Quality Assurance & Testing
-* Database Systems
-* Computer Networks
+- Data Structures & Algorithms
+- Object-Oriented Programming
+- Software Design & Architecture
+- Software Quality Assurance & Testing
+- Database Systems
+- Computer Networks
 
 My academic background provides the foundation. The projects provide the application.
 
@@ -225,17 +236,12 @@ That is exactly what makes the journey interesting.
 
 The live portfolio brings these ideas together through projects, technical capabilities, experience, and ongoing exploration.
 
-**Live Website:**
-[Add portfolio URL]
-
-**LinkedIn:**
-[Add LinkedIn URL]
-
-**GitHub:**
-[Add GitHub URL]
-
-**Email:**
-[Add professional email]
+| | |
+|---|---|
+| 🌐 **Live Website** | [Add portfolio URL] |
+| 💼 **LinkedIn** | [Add LinkedIn URL] |
+| 💻 **GitHub** | [Add GitHub URL] |
+| ✉️ **Email** | [Add professional email] |
 
 ---
 
@@ -273,27 +279,19 @@ npm run build
 
 ---
 
-## Philosophy in One Sentence
-
 > **Build what matters. Understand what you build. Keep learning what comes next.**
-
----
 
 ## Author
 
 **Bruno Shema**
-
 Software Engineer
 Building practical software. Exploring intelligent systems.
 
 ---
-
-## Closing
 
 This portfolio is not intended to suggest that the journey is finished.
 
 It is a snapshot of where I am, what I have built, what I have learned, and the direction I am deliberately moving towards.
 
 **The goal is not to know everything.**
-
 **The goal is to keep becoming capable of building things that matter.**
