@@ -8,89 +8,98 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   1. RAW HEX COLORS (Earthy, Light Brown & Warm Neutrals)
+   1. RAW HEX COLORS (Modern Minimalist Warm Skin-Taupe)
    ============================================================ */
 :root {
-  --raw-bg: #faf9f6; /* Cream / Alabaster background */
-  --raw-text: #4a453e; /* Muted dark brown-gray */
-  --brand: #a37f55; /* Warm Light Brown / Camel */
-  --accent: #7a6f5d; /* Soft Clay Taupe */
-  --contrast: #1c1917; /* Deep Espresso / Off-black */
+  --raw-bg: #fdfbfa;
+  --raw-text: #2f2a25;
+  --brand: #b38f65;
+  --accent: #8e8271;
+  --contrast: #181411;
   color-scheme: light;
 }
 
 .dark {
-  --raw-bg: #151311; /* Deep Espresso background */
-  --raw-text: #d9d2c9; /* Soft Linen gray-brown */
-  --brand: #c8a275; /* Warm Golden Brown */
-  --accent: #a89b87; /* Soft Sand Taupe */
-  --contrast: #faf9f6; /* Pure Cream for high contrast */
+  --raw-bg: #35312d; /* warm dark taupe — lifted from #1e1b18 */
+  --raw-text: #d9d3cb; /* softer than #eae6e1, easier on the eye */
+  --brand: #dcb384; /* unchanged — your brand warm gold */
+  --accent: #b0a493; /* unchanged */
+  --contrast: #f3efe9; /* was near-white, now warm off-white */
   color-scheme: dark;
 }
 
 /* ============================================================
-   2. DERIVED TOKENS — shared formulas, valid in both themes.
+   2. DERIVED TOKENS — Perfectly Balanced Type and Hierarchy
    ============================================================ */
 :root,
 .dark {
-  /* app-* primitives */
+  /* Core Base Properties */
   --bg: var(--raw-bg);
   --text: var(--raw-text);
-  --text-h: color-mix(in srgb, var(--raw-text) 15%, var(--contrast) 85%);
-  --border: color-mix(in srgb, var(--raw-text) 18%, transparent);
-  --code-bg: color-mix(in srgb, var(--raw-bg) 94%, var(--raw-text) 6%);
 
-  --brand-bg: color-mix(in srgb, var(--brand) 12%, transparent);
-  --brand-border: color-mix(in srgb, var(--brand) 40%, transparent);
+  /* Text Architecture */
+  --text-h: var(--contrast); /* Distinct stark color for structural headings */
+  --text-muted: color-mix(
+    in srgb,
+    var(--raw-text) 65%,
+    transparent
+  ); /* Subtitles & micro-copy */
 
-  /* shadcn surfaces — tinted steps away from --bg toward --contrast */
+  /* Borders and Clean Fills */
+  --border: color-mix(in srgb, var(--raw-text) 12%, transparent);
+  --code-bg: color-mix(in srgb, var(--raw-bg) 92%, var(--raw-text) 8%);
+
+  /* Brand Accents */
+  --brand-bg: color-mix(in srgb, var(--brand) 10%, transparent);
+  --brand-border: color-mix(in srgb, var(--brand) 30%, transparent);
+
+  /* Shadcn Surfaces — Tinted layout steps cleanly detached from the background */
   --background: var(--bg);
-  --foreground: var(--text-h);
-  --card: color-mix(in srgb, var(--bg) 94%, var(--contrast) 6%);
-  --card-foreground: var(--text-h);
+  --foreground: var(--text);
+  --card: color-mix(in srgb, var(--bg) 95%, var(--contrast) 5%);
+  --card-foreground: var(--text);
   --popover: var(--card);
-  --popover-foreground: var(--text-h);
+  --popover-foreground: var(--text);
 
-  /* primary = strong contrast pole; foreground flips to the opposite pole */
-  --primary: color-mix(in srgb, var(--contrast) 88%, var(--bg) 12%);
-  --primary-foreground: var(--raw-bg);
+  /* UI Contrast Poles */
+  --primary: var(--contrast);
+  --primary-foreground: var(--bg);
 
-  --secondary: color-mix(in srgb, var(--bg) 88%, var(--contrast) 12%);
-  --secondary-foreground: var(--text-h);
-  --muted: color-mix(in srgb, var(--bg) 92%, var(--contrast) 8%);
-  --muted-foreground: var(--text);
+  --secondary: color-mix(in srgb, var(--bg) 90%, var(--contrast) 10%);
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--bg) 93%, var(--contrast) 7%);
+  --muted-foreground: var(--text-muted);
 
-  /* shadcn "accent" = neutral hover surface, distinct from --brand */
+  /* Interactive Elements */
   --accent-surface: var(--secondary);
-  --accent-foreground: var(--text-h);
+  --accent-foreground: var(--contrast);
 
-  /* destructive is intentionally brand-independent */
   --destructive: light-dark(
     oklch(0.577 0.245 27.325),
     oklch(0.704 0.191 22.216)
   );
 
-  --input: color-mix(in srgb, var(--raw-text) 22%, transparent);
-  --ring: color-mix(in srgb, var(--brand) 60%, transparent);
+  --input: color-mix(in srgb, var(--raw-text) 16%, transparent);
+  --ring: color-mix(in srgb, var(--brand) 70%, transparent);
 
-  /* 5-step ramp from brown brand toward contrast */
-  --chart-1: color-mix(in srgb, var(--brand) 90%, var(--contrast) 10%);
-  --chart-2: color-mix(in srgb, var(--brand) 70%, var(--contrast) 30%);
+  /* Clean 5-step brown-skin ramp */
+  --chart-1: var(--brand);
+  --chart-2: color-mix(in srgb, var(--brand) 75%, var(--contrast) 25%);
   --chart-3: color-mix(in srgb, var(--brand) 50%, var(--contrast) 50%);
   --chart-4: color-mix(in srgb, var(--brand) 30%, var(--contrast) 70%);
-  --chart-5: color-mix(in srgb, var(--brand) 15%, var(--contrast) 85%);
+  --chart-5: var(--contrast);
 
-  /* sidebar aliases card/brand rather than restating values */
+  /* Sidebar configuration */
   --sidebar: var(--card);
-  --sidebar-foreground: var(--text-h);
+  --sidebar-foreground: var(--text);
   --sidebar-primary: var(--brand);
-  --sidebar-primary-foreground: var(--raw-bg);
+  --sidebar-primary-foreground: var(--bg);
   --sidebar-accent: var(--accent-surface);
-  --sidebar-accent-foreground: var(--text-h);
+  --sidebar-accent-foreground: var(--contrast);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  --radius: 0.5rem;
+  --radius: 0.625rem; /* Slightly softer modern curves */
 }
 
 /* ============================================================
@@ -100,17 +109,15 @@
   --color-app-bg: var(--bg);
   --color-app-text: var(--text);
   --color-app-heading: var(--text-h);
+  --color-app-text-muted: var(--text-muted);
   --color-app-border: var(--border);
   --color-app-code: var(--code-bg);
   --color-app-brand: var(--brand);
   --color-app-brand-bg: var(--brand-bg);
   --color-app-brand-border: var(--brand-border);
 
-  --font-sans:
-    "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 @theme inline {
@@ -151,12 +158,10 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 /* ============================================================
-   4. CUSTOM UTILITIES
+   4. UTILITIES & TYPOGRAPHY IMPLEMENTATION
    ============================================================ */
 @utility card-base {
   background-color: var(--card);
@@ -164,7 +169,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @utility badge-accent {
@@ -178,60 +183,23 @@
   align-items: center;
 }
 
-@utility code-block {
-  font-family: var(--font-mono);
-  background-color: var(--code-bg);
-  color: var(--text-h);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
-}
-
-/* ============================================================
-   5. BASE RESET & SCROLLBARS
-   ============================================================ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--raw-text) 25%, transparent);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--raw-text) 45%, transparent);
-}
-
-body {
-  margin: 0;
-  scroll-behavior: smooth;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-#root {
-  --app-max-width: 1300px;
-  width: var(--app-max-width);
-  max-width: 100%;
-  margin: 0 auto;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-app-bg text-app-text antialiased;
   }
-  html {
-    @apply font-sans;
+
+  /* Structural, crisp headings using the absolute contrast poles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-app-heading font-semibold tracking-tight;
+  }
+
+  /* Optional Special Colored Titles Helper */
+  .title-colored {
+    @apply text-app-brand font-bold tracking-tight;
   }
 }
