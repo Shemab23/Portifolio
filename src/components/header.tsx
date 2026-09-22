@@ -67,7 +67,7 @@ export function Nav() {
           {/* Desktop CTA */}
           <a
             href={ctaHref}
-            className="hidden rounded-lg border border-app-border px-4 py-1.5 text-sm font-medium text-app-text transition-colors hover:bg-[var(--secondary)] md:inline-flex"
+            className="hidden rounded-lg border border-app-border px-4 py-1.5 text-md font-medium text-app-text transition-colors hover:bg-[var(--secondary)] md:inline-flex"
           >
             {nav.cta.label}
           </a>
