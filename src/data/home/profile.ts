@@ -1,213 +1,166 @@
+// refine
+
 import {
-  BestProjectsData,
-  ContactData,
-  EducationData,
-  HeroData,
-  HireData,
-  ToolkitData,
-  WhatIDoData,
+  About,
+  CardsSection,
+  Contact,
+  HeroContent,
+  WHatIDO,
 } from "@/types/home/profile";
 
-export const hero: HeroData = {
-  name: "Bruno Shema",
-  tagline:
-    "Software Engineer building practical web, mobile, and backend systems.",
-  status: "Open to junior SWE roles · Kigali / Remote",
+export const heroContent: HeroContent = {
+  title: "Full-Stack Software Engineer",
+  headline: "Building production-ready software from day one.",
   description:
-    "Rwandan Software Engineer, B.Sc. graduate (3.78 / 4.00). I build software that solves real problems — from logistics platforms to invoicing tools for small businesses.",
-  ctas: [
-    { label: "See my work", href: "/work", variant: "primary" },
-    { label: "About me", href: "/about", variant: "secondary" },
-  ],
-  portrait: {
-    src: "/home/hero-portrait.png",
-    alt: "Portrait of Bruno Shema",
+    "A resourceful full-stack engineer focused on clean architecture, modern frameworks, and writing scalable code that moves businesses forward.",
+  image: "/home/hero-portrait.png",
+  cta: {
+    text: "View My Projects",
+    link: "/work",
   },
 };
 
-export const whatIDo: WhatIDoData = {
-  label: "What I do",
-  headline:
-    "I build software that solves real problems — from the database to the interface.",
-  paragraphs: [
-    "I work across the stack: frontend with React and Next.js, backend with Node, Express, and Go, and data layers with PostgreSQL and Firebase. I've shipped logistics platforms, invoicing tools, and dashboards that people actually use.",
-    "My approach is practical. I start by understanding the problem, break it into pieces, pick the simplest tools that fit, then build incrementally and test as I go. I'd rather ship something small that works than something big that doesn't.",
-    "Right now I'm expanding into AI-assisted development and intelligent systems — learning how software can be more capable without losing clarity or control.",
-  ],
-  emphasis: "Practical software. Clear thinking. Real outcomes.",
-};
-
-export const bestProjects: BestProjectsData = {
-  label: "Selected work",
-  headline: "Three builds that show how I work.",
-  projects: [
+export const cardsSection: CardsSection = {
+  title: "Selected Work",
+  cards: [
     {
-      slug: "easy-invoice",
-      title: "Easy Invoice",
-      role: "Software Developer",
-      year: 2026,
-      summary:
-        "An invoicing MVP for small businesses — quotations, invoices, taxes, discounts, client fees.",
-      stack: ["Next.js", "TypeScript", "Firebase", "Tailwind"],
-      image: "/home/easy-invoice.png",
-      imageAlt: "Dashboard preview of Easy Invoice.",
-      href: "/work/easy-invoice",
-      accent: "Used by 10+ clients",
-    },
-    {
-      slug: "tumagreen",
-      title: "TumaGreen",
-      role: "Full-Stack Developer",
-      year: 2025,
-      summary:
-        "Real-time delivery and logistics platform connecting clients to couriers, localized for Rwanda.",
-      stack: ["React", "Express", "Sequelize", "Leaflet"],
-      image: "/home/tumagreen.jpeg",
-      imageAlt: "Live map interface of the TumaGreen delivery platform.",
-      href: "/work/tumagreen",
-      accent: "In production",
-    },
-    {
-      slug: "ai-skills-lab",
-      title: "AI Skills Lab",
-      role: "Software Developer",
-      year: 2026,
-      summary:
-        "A structured learning platform tracking practical AI workflows, syllabus timelines, and multi-agent layouts.",
-      stack: ["Next.js", "TypeScript", "Tailwind", "AI Orchestration"],
-      image: "/home/ai-skills-lab.png",
-      imageAlt: "Landing page of the AI Skills Lab learning platform.",
-      href: "/work/ai-skills-lab",
-    },
-  ],
-  viewAll: { label: "All work", href: "/work" },
-};
-
-export const toolkit: ToolkitData = {
-  label: "Toolkit",
-  headline: "What I build with — and what I'm still learning.",
-  groups: [
-    {
-      label: "Comfortable",
-      note: "I've shipped with these.",
-      items: [
-        "TypeScript",
-        "JavaScript",
-        "Python",
-        "React",
-        "Next.js",
-        "React Native",
-        "Node.js",
-        "Express.js",
-        "FastAPI",
-        "PostgreSQL",
-        "MySQL",
-        "Firebase",
-        "Tailwind CSS",
-        "Git",
-        "Docker",
-        "REST APIs",
-        "Vercel",
-      ],
-    },
-    {
-      label: "Learning",
-      note: "Currently in progress.",
-      items: [
-        "Go",
-        "Hono",
-        "Drizzle ORM",
-        "Edge AI",
-        "TinyML",
-        "System Design",
-        "Caddy",
-        "AI Orchestration",
-        "Cloudflare R2",
-      ],
-    },
-  ],
-  footnote:
-    "I list tools I've actually used. Learning means I'm still building depth — not pretending to have it.",
-};
-
-export const education: EducationData = {
-  label: "Education",
-  entries: [
-    {
-      degree: "B.Sc. Software Engineering",
-      school: "European University of Lefke",
-      location: "Lefke, TRNC",
-      period: "2022 — 2026",
-      detail: "CGPA 3.78 / 4.00",
-      highlight: "Graduated",
-    },
-  ],
-  microNote:
-    "Coursework covered data structures, algorithms, databases, networks, software design, and AI foundations.",
-};
-
-export const hire: HireData = {
-  label: "Work with me",
-  headline:
-    "I'm looking for a junior Software Engineering role — or a project worth building.",
-  paths: [
-    {
-      title: "Hire me",
+      image: "/home/IANE'sTravelTour.png",
+      name: "IANE'sTravelTour",
+      service: "Web & App Development",
       description:
-        "Full-time or internship. I'm based in Kigali and open to remote roles.",
-      bullets: [
-        "Frontend, backend, or full-stack",
-        "Comfortable in TypeScript, React, Node, PostgreSQL",
-        "Fast learner, honest about what I don't know yet",
-      ],
+        "Full travel booking website for a Kigali-based company operating across East Africa and internationally — flight booking, tour planning, and a streamlined enquiry flow, built end-to-end.",
+      year: "2026",
+      code: "https://github.com/Shemab23/IANE-STravel-Tour",
+      preview: "https://iane-s-travel-tour-black.vercel.app/",
     },
     {
-      title: "Collaborate",
+      image: "/home/Ai-skill-Lab.png",
+      name: "AI Skill Lab",
+      service: "AI & Automation",
       description:
-        "Freelance work, open source, or a side project that needs a builder.",
-      bullets: [
-        "Small business sites, dashboards, MVPs",
-        "Clear scope, clear timeline, clear deliverable",
-        "I document as I go — you own what I build",
-      ],
+        "Brand and website for an AI development bootcamp, built using a multi-model AI workflow combined with manual refinement — from MVP to polished product.",
+      year: "2026",
+      code: "https://github.com/Shemab23/AI-skills-Lab",
+      preview: "https://ai-skills-lab.vercel.app/",
+    },
+    {
+      image: "/home/Easy-Invoce.png",
+      name: "Easy Invoice",
+      service: "Digitizing Manual Processes",
+      description:
+        "An AI-powered built invoicing MVP for government and personal compliance — turns quotations, taxes, discounts, and fees into instant structured receipts. (Validated MVP, no live client yet.)",
+      year: "2026",
+      code: "https://github.com/Shemab23/EasyInvoiceLtd",
+      preview: "https://easy-invoice-ltd.vercel.app/",
+    },
+    {
+      image: "/home/model.jpeg",
+      name: "Garment Prompt Bank",
+      service: "Design & Branding",
+      description:
+        "AI image workflow for a garment business — turns blurry photos into HD, multi-angle product shots and places garments on models or scenes for fast, consistent promo content.",
+      year: "2026",
+      preview:
+        "https://drive.google.com/drive/folders/1CQBMI-KomOha-BLcG1cBupFyerv8A1SJ?usp=sharing",
+    },
+    {
+      name: "C/C++ Lab Assistant",
+      service: "Code Reviews, QA & Mentorship",
+      description:
+        "Mentored university students in C, C++, OOP, memory management, and algorithms — reinforcing correct, real-world coding practices.",
+      year: "2024-26",
+    },
+    {
+      name: "Nobel Source",
+      image: "/home/NobelSource.png",
+      service: "Web & App Development",
+      description:
+        "Built an agricultural marketplace connecting farmers directly with buyers to cut out middleman fees and improve price transparency.",
+      year: "2024-26",
+      code: "https://github.com/Shemab23/NobelSource",
+      preview: "https://www.youtube.com/watch?v=WGIxNCtv6RM",
     },
   ],
-  primaryCta: {
-    label: "Get in touch",
-    href: "/contact",
+  more: {
+    text: "View all work",
+    link: "/work",
   },
-  reassurance: "I reply within 24 hours.",
 };
 
-export const contact: ContactData = {
-  label: "Let's talk",
-  headline: "If you're hiring, building, or just curious — reach me directly.",
-  channels: [
-    {
-      label: "Phone",
-      value: "+250 796 584 149",
-      href: "tel:+250796584149",
-      note: "Call or WhatsApp",
-    },
-    {
-      label: "Email",
-      value: "shemab71@gmail.com",
-      href: "mailto:shemab71@gmail.com",
-      note: "I reply within 24 hours",
-    },
-  ],
-  socials: [
-    { label: "GitHub", href: "https://github.com/Shemab23" },
-    { label: "LinkedIn", href: "www.linkedin.com/in/shema-bruno" },
-    {
-      label: "YouTube",
-      href: "https://www.youtube.com/channel/UCLsQzBeS8gdKXQJGQjLeD_Q",
-    },
-  ],
-  closing: "Kigali, Rwanda · Open to remote",
-  footer: {
-    name: "Bruno Shema",
-    year: 2026,
-    builtWith: "Built with React, TypeScript, and Tailwind.",
+export const aboutContent: About = {
+  title: "Engineering with Purpose",
+  brief:
+    "I am a Full-Stack Software Engineer backed by a formal engineering degree and a proven track record of building production-ready digital products from scratch. My experience ranges from orchestrating AI-driven web applications to optimizing low-level systems. I specialize in translating ambiguous business requirements into practical software, prioritizing elegant simplicity, resourcefulness, and code that moves businesses forward.",
+  cta: {
+    text: "Learn More",
+    link: "/about",
+  },
+};
+
+export const whatIDoContent: WHatIDO[] = [
+  {
+    title: "Web & App Development",
+    // brief:
+    //   "I build production-ready web applications and internal tools from scratch, mapping out the entire frontend, backend, and database architecture. I specialize in launching rapid first-versions to test market ideas quickly and refactoring legacy codebases to optimize performance without breaking existing flows.",
+    includes: [
+      "Full-stack architecture",
+      "MVP rapid deployment",
+      "Legacy code refactoring",
+      "Database design & optimization",
+    ],
+  },
+  {
+    title: "AI Integration & Automation",
+    // brief:
+    //   "I connect intelligent LLM models into your existing workflows and products to automate repetitive tasks. This includes implementing semantic search engines, contextual AI chatbots, automated content generation pipelines, and background data agents that save hundreds of engineering hours.",
+    includes: [
+      "Multi-model AI orchestration",
+      "Workflow task automation",
+      "Intelligent data extraction",
+      "Custom chatbot pipelines",
+    ],
+  },
+  {
+    title: "Digitizing Manual Processes",
+    // brief:
+    //   "I replace fragmented operations relying on spreadsheets, paper trails, and messy email threads with custom structured software. By building centralized internal dashboards, scalable databases, and validation forms, I give founders a real-time overview of business performance.",
+    includes: [
+      "Custom business dashboards",
+      "Spreadsheet-to-app migration",
+      "Data pipeline structuring",
+      "Internal operational tooling",
+    ],
+  },
+  {
+    title: "UI/UX Design & Branding Systems",
+    // brief:
+    //   "I craft clean, intuitive digital interfaces built on a unified foundation of wireframes, dynamic light/dark layouts, and brand systems. I bridge the gap between design and development while deploying AI-driven pipelines to generate consistent, brand-aligned marketing collateral.",
+    includes: [
+      "High-fidelity UI components",
+      "Design tokens & color systems",
+      "Sleek user journey layouts",
+      "AI content generation setups",
+    ],
+  },
+  {
+    title: "Code Quality & Technical Mentorship",
+    // brief:
+    //   "I audit existing engineering codebases to identify performance bottlenecks, establish automated testing pipelines, and ensure stability as traffic scales. In addition, I provide deep-dive technical mentorship covering core algorithms, object-oriented design, and system architecture fundamentals.",
+    includes: [
+      "Deep-dive performance audits",
+      "C/C++ & OOP mentoring",
+      "QA testing infrastructure",
+      "Algorithm design coaching",
+    ],
+  },
+];
+
+export const contactContent: Contact = {
+  Hook: "Let’s build something impactful together.",
+  state:
+    "I am actively looking for a junior full-stack role in a professional engineering environment where I can contribute to production-ready code, learn from senior mentorship, and solve complex, real-world problems.",
+  cta: {
+    text: "Get In Touch",
+    link: "/contact",
   },
 };

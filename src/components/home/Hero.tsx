@@ -1,65 +1,72 @@
-import { hero } from "@/data/home/profile";
-import { cn } from "@/lib/utils";
+import { heroContent } from "@/data/home/profile";
+import {
+  fadeInUp,
+  microInteractive,
+  staggerContainer,
+  subtleScale,
+} from "@/lib/Motions";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-export function HomeHero() {
+export default function HeroSection() {
   return (
-    <section className="w-full">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 py-2 md:grid-cols-2 md:py-4">
-        {/* LEFT — identity */}
+    <section className="relative min-h-[80vh] w-full flex items-center justify-center px-6 py-12 md:px-12 lg:px-24 bg-app-bg text-app-text overflow-hidden">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+      >
+        {/* Left Content Side */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="flex flex-col gap-6"
+          variants={fadeInUp}
+          className="col-span-1 lg:col-span-7 flex flex-col justify-center space-y-6 text-left"
         >
-          <span className="badge-accent w-fit text-sm">{hero.status}</span>
+          {/* Tagline / Sub-heading */}
+          <span className="title-colored text-sm md:text-base font-medium uppercase tracking-wider">
+            {heroContent.title}
+          </span>
 
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight text-app-heading md:text-6xl">
-            {hero.name}
+          {/* Core Headline */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-app-heading leading-tight tracking-tight">
+            {heroContent.headline}
           </h1>
 
-          <p className="text-lg text-app-text md:text-xl">{hero.tagline}</p>
-
-          <p className="max-w-prose text-base text-app-text-muted">
-            {hero.description}
+          {/* Description */}
+          <p className="text-base md:text-lg text-app-text-muted max-w-xl font-normal leading-relaxed">
+            {heroContent.description}
           </p>
 
-          <div className="flex flex-wrap gap-3 pt-2">
-            {hero.ctas.map((cta) => (
-              <a
-                key={cta.href}
-                href={cta.href}
-                className={cn(
-                  "rounded-lg px-5 py-2.5 text-sm font-medium transition-all",
-                  cta.variant === "primary" &&
-                    "bg-[var(--contrast)] text-[var(--bg)] hover:opacity-90",
-                  cta.variant === "secondary" &&
-                    "border border-app-border text-app-text hover:bg-[var(--secondary)]",
-                )}
-              >
-                {cta.label}
-              </a>
-            ))}
+          {/* CTA Link */}
+          <div className="pt-4">
+            <motion.a
+              href={heroContent.cta.link}
+              variants={microInteractive}
+              whileHover="hover"
+              whileTap="tap"
+              className="inline-flex items-center gap-2 text-base md:text-lg font-bold text-app-heading underline decoration-app-brand decoration-2 underline-offset-4 hover:text-app-brand transition-colors duration-200"
+            >
+              {heroContent.cta.text}
+              <ArrowUpRight className="w-5 h-5 transition-transform duration-200" />
+            </motion.a>
           </div>
         </motion.div>
 
-        {/* RIGHT — portrait */}
+        {/* Right Media Side */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-          className="relative w-full"
+          variants={subtleScale}
+          className="col-span-1 lg:col-span-5 w-full h-full flex items-center justify-center"
         >
-          <div className="card-base overflow-hidden p-0">
+          <div className="w-full h-[300px] sm:h-[400px] lg:h-full min-h-[350px] lg:min-h-[480px] relative rounded-lg overflow-hidden border border-app-border">
             <img
-              src={hero.portrait.src}
-              alt={hero.portrait.alt}
-              className="aspect-square w-full object-cover"
+              src={heroContent.image}
+              alt={heroContent.headline}
+              className="w-full h-full object-cover"
+              loading="eager"
             />
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -5,9 +5,9 @@ export interface NavItem {
 
 export interface NavData {
   name: string;
+  position: string;
   homeHref: string;
   items: NavItem[];
-  cta: { label: string; href: string };
 }
 
 export interface FooterLink {

@@ -1,0 +1,126 @@
+---
+title: "Build a Mini Version Yourself"
+order: 5
+---
+
+Reading about a pipeline and building one are different kinds of understanding. This chapter strips everything down to the smallest version that actually works — five steps, real code, walked through slowly enough that nothing is assumed.
+
+## Step 1 — Install what you need
+
+```bash
+npm install @mdx-js/rollup @mdx-js/react remark-frontmatter remark-mdx-frontmatter
+```
+
+Four packages, each doing one job:
+
+- `@mdx-js/rollup` — the actual compiler. It's the piece that turns an `.mdx` file into real JavaScript, at build time.
+- `@mdx-js/react` — provides `MDXProvider`, the piece that lets a compiled MDX file look up custom components by name (like `<Highlight />`) at render time.
+- `remark-frontmatter` — teaches the compiler to recognize the `---` block at the top of a file as frontmatter, instead of trying to parse it as regular content.
+- `remark-mdx-frontmatter` — takes what `remark-frontmatter` found and turns it into a `frontmatter` export your code can actually read (`frontmatter.title`, `frontmatter.date`, etc.).
+
+No CMS SDK, no server framework — this is the entire dependency list.
+
+## Step 2 — Teach Vite to compile `.mdx` files
+
+```typescript
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import mdx from "@mdx-js/rollup";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+
+export default defineConfig({
+  plugins: [
+    {
+      enforce: "pre",
+      ...mdx({
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+        providerImportSource: "@mdx-js/react",
+      }),
+    },
+    react(),
+  ],
+});
+```
+
+Line by line:
+
+- `import { defineConfig } from "vite";` — a helper that gives you autocomplete and type-checking while writing Vite's config. Purely a developer-experience helper; it doesn't change behavior.
+- `import react from "@vitejs/plugin-react";` — the plugin that lets Vite understand normal `.tsx`/`.jsx` React files. Every Vite + React project needs this regardless of MDX.
+- `import mdx from "@mdx-js/rollup";` — the MDX compiler plugin itself, imported so it can be added to Vite's plugin list below.
+- `import remarkFrontmatter from "remark-frontmatter";` and `import remarkMdxFrontmatter from "remark-mdx-frontmatter";` — the two frontmatter helpers from Step 1, imported so they can be handed to the MDX compiler.
+- `plugins: [ ... ]` — this array is the list of transformations Vite runs on your files, in order, every time it processes something.
+- `{ enforce: "pre", ...mdx({ ... }) }` — this is the MDX plugin object, spread (`...`) into a wrapper that adds `enforce: "pre"`. That setting tells Vite "run this before other plugins" — specifically, before the React plugin gets a chance to touch the file. MDX has to compile the file into JSX _first_; only after that can the React plugin process the result.
+- `remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]` — this is the line that actually wires in frontmatter support. Without it, the compiler has no idea what to do with the `---` block at the top of a post and will error or ignore it.
+- `providerImportSource: "@mdx-js/react"` — this is the line that makes custom components resolvable at all. It tells the compiler "when this MDX file runs, ask `@mdx-js/react`'s `MDXProvider` what components are available" instead of only looking at props passed directly. Skip this line, and any `<Highlight />` or `<CTA />` tag will fail with "component is not defined," even if it's registered correctly everywhere else.
+- `react()` — added after the MDX plugin, so it processes the JSX that MDX just produced, the same way it processes any other `.tsx` file in the project.
+
+## Step 3 — Write one real post
+
+```mdx
+---
+title: "My First Mini Post"
+status: "published"
+---
+
+This is a real MDX file. Plain Markdown works exactly like this sentence.
+
+<Highlight text="But this line is a real React component." />
+```
+
+Three parts:
+
+- The `---` block at the top is frontmatter — plain key-value data about the post (`title`, `status`) that your code can read separately from the content itself, thanks to the two remark plugins from Step 2.
+- The first sentence is ordinary Markdown — no special handling needed, it renders as a plain paragraph.
+- `<Highlight text="..." />` is JSX, sitting directly inside what otherwise looks like plain writing. This is the exact thing plain Markdown could never do — this line only works because the file extension is `.mdx`, not `.md`.
+
+Save this as `src/posts/hello-world.mdx`.
+
+## Step 4 — Build the component the post references
+
+```tsx
+// src/Highlight.tsx
+export function Highlight({ text }: { text: string }) {
+  return (
+    <mark style={{ background: "#fde68a", padding: "2px 6px" }}>{text}</mark>
+  );
+}
+```
+
+- `export function Highlight({ text }: { text: string })` — a completely ordinary React component. It takes one prop, `text`, typed as a string. Nothing about this file knows or cares that it will eventually be used inside an MDX post — it's just a component, the same as any other.
+- `return <mark style={{...}}>{text}</mark>` — renders the native HTML `<mark>` tag (built-in browser highlighting) with a bit of inline styling, and drops the `text` prop inside it. This is the visual highlight you'll see rendered in the browser.
+
+## Step 5 — Read every post and render one
+
+```tsx
+// src/App.tsx
+import { MDXProvider } from "@mdx-js/react";
+import { Highlight } from "./Highlight";
+
+const posts = import.meta.glob("/src/posts/*.mdx", { eager: true });
+const components = { Highlight };
+
+export default function App() {
+  const [path, mod] = Object.entries(posts)[0]; // just grab the first one for this demo
+  const Post = mod.default;
+
+  return (
+    <MDXProvider components={components}>
+      <Post />
+    </MDXProvider>
+  );
+}
+```
+
+- `import { MDXProvider } from "@mdx-js/react";` — brings in the component that makes custom tags resolvable, as set up back in Step 2.
+- `import { Highlight } from "./Highlight";` — brings in the actual component the post references.
+- `const posts = import.meta.glob("/src/posts/*.mdx", { eager: true });` — this is Vite scanning the filesystem, right now, at build time, for every `.mdx` file matching that path. `eager: true` means it compiles and loads all of them immediately, rather than only loading a post when it's actually requested. The result, `posts`, is an object where each key is a file path and each value is that file's compiled module (its component plus its frontmatter).
+- `const components = { Highlight };` — a plain lookup table: tag name to real component. This is what gets handed to `MDXProvider` below, so any `<Highlight />` tag inside any post can be resolved.
+- `const [path, mod] = Object.entries(posts)[0];` — `Object.entries(posts)` turns that object into an array of `[path, module]` pairs; this line just grabs the first one, since this demo only has one post to show. In the real blog, this is the point where a router would instead look up the post matching the current URL's slug.
+- `const Post = mod.default;` — pulls the actual compiled component out of that module. This is the piece you can render like any other component.
+- `<MDXProvider components={components}><Post /></MDXProvider>` — wraps the post in the provider, handing it the lookup table, then renders the post itself. Everything inside `<Post />` — plain text and `<Highlight />` alike — renders correctly because of this wrapping.
+
+![An MDX file in an editor next to its rendered output in the browser](/blogs/what-is-mdx/chapter5-minimal-demo.jpeg)
+
+Run `npm run dev`, and that's a working end-to-end version of everything Chapter 4 described — minus the folder-per-post structure, the chapter nesting, and the routing, which are refinements on top of this same core idea, not different ideas. The whole trick, stripped to its studs, is exactly three things: `import.meta.glob` finds the files, the MDX compiler turns them into components, and `MDXProvider` lets those components use your own React code. Everything else in this blog is that pattern, repeated and organized.

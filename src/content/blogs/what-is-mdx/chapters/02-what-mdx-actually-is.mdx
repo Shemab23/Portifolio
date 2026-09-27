@@ -1,0 +1,40 @@
+---
+title: "What MDX Actually Is"
+order: 2
+---
+
+Back in Chapter 1, MDX showed up as "the hole that fills the gap Markdown left behind." Time to be precise about what's actually sitting in that hole.
+
+## The name is the definition
+
+Same trick as `TSX`. TypeScript alone can't parse JSX — the "X" in `TSX` is the compiler's way of saying "expect HTML-like tags mixed into this file." MDX follows the identical logic: Markdown alone can't parse JSX either, so the "X" means the same thing — "this file can contain real JSX, embedded directly in the writing."
+
+That's it. That's the whole idea. MDX isn't a new language you have to learn from scratch — it's Markdown, doing everything Markdown already does, with one new superpower: you can drop a real, importable component straight into your prose.
+
+## Where it actually came from
+
+MDX first showed up around **September 2018**, out of a team called Compositor (the project later moved under Vercel's stewardship), carrying the tagline **"Markdown for the component era."** The problem it was solving was exactly the one from the end of Chapter 1 — before MDX, anyone who wanted a real component inside long-form content was stuck hand-writing JSX inside giant JavaScript template strings. Functional. Miserable. MDX made that combination feel native instead of hacked together.
+
+It's gone through real rewrites since — a first version around 2018, a full rebuild for **MDX v2** (the one modern tools like `@mdx-js/rollup` are built on), and it now sits at **v3**. The core idea hasn't changed across any of that.
+
+## What it actually looks like
+
+Here's a tiny, real example — the same pattern this blog uses for its own `<CTA />` component:
+
+```mdx
+Markdown text works exactly like normal here.
+
+<CTA text="See the source" link="https://github.com/example" />
+
+And then you can just keep writing normal prose again afterward.
+```
+
+Notice what's _not_ happening: no special escape characters, no giant string of HTML, no separate template file. A real component sits directly inside a paragraph of plain writing, exactly where it belongs in the reading flow.
+
+![How an MDX file compiles at build time into a shipped React component](/blogs/what-is-mdx/chapter2-compile-diagram.jpeg)
+
+## The fact that makes the rest of this blog possible
+
+Here's the detail worth sitting with, because it's the reason this entire site can run without a backend: **MDX has no runtime of its own.** Every `.mdx` file gets fully compiled into a real JavaScript/React component _before_ it ever reaches a browser — at build time, once, ahead of time. Nothing about rendering an MDX file requires a server standing by to process it live.
+
+That single fact is doing more work than it looks like. It's the difference between "a blog that needs a backend to serve content" and "a blog that's just... files, turned into components, shipped as static output." Chapter 3 gets into exactly why that distinction matters enough to skip a CMS entirely.

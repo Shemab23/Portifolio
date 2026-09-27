@@ -1,56 +1,82 @@
-import { whatIDo } from "@/data/home/profile";
+import { whatIDoContent } from "@/data/home/profile";
+import { fadeInUp, microInteractive, staggerContainer } from "@/lib/Motions";
 import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export function HomeWhatIDo() {
+export default function WhatIDoSection() {
   return (
-    <section className="w-full">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 py-2 md:grid-cols-2 md:py-4">
-        {/* LEFT — text */}
+    <section className="w-full bg-app-bg text-app-text px-6 py-20 md:px-12 lg:px-24">
+      <div className="w-full max-w-7xl mx-auto">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="flex flex-col gap-6"
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-12"
         >
-          <span className="text-sm font-medium uppercase tracking-wider text-app-brand">
-            {whatIDo.label}
-          </span>
-
-          <h2 className="text-2xl font-semibold leading-snug tracking-tight text-app-heading md:text-4xl">
-            {whatIDo.headline}
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-app-heading">
+            What I Do
           </h2>
-
-          <div className="flex flex-col gap-4">
-            {whatIDo.paragraphs.map((p, i) => (
-              <p
-                key={i}
-                className="text-base leading-relaxed text-app-text-muted"
-              >
-                {p}
-              </p>
-            ))}
-          </div>
-
-          <p className="title-colored text-lg md:text-xl">{whatIDo.emphasis}</p>
         </motion.div>
 
-        {/* RIGHT — image */}
+        {/* Services Grid */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-          className="w-full"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          <div className="card-base overflow-hidden p-0">
-            <img
-              src="/home/what-i-do.png"
-              alt="A minimal engineering workspace with a laptop, notebook, and coffee."
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </div>
+          {whatIDoContent.map((service, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeInUp}
+              className="card-base flex flex-col justify-between group hover:border-app-brand/40"
+            >
+              <div className="space-y-4">
+                {/* Title */}
+                <h3 className="text-xl font-bold text-app-heading group-hover:text-app-brand transition-colors duration-200">
+                  {service.title}
+                </h3>
+
+                {/* Brief Description */}
+                {/* <p className="text-sm md:text-base text-app-text font-normal leading-relaxed">
+                  {service.brief}
+                </p> */}
+              </div>
+
+              {/* Bulleted Includes List */}
+              <div className="mt-6 pt-6 border-t border-app-border">
+                <ul className="space-y-2.5">
+                  {service.includes.map((item, itemIdx) => (
+                    <li
+                      key={itemIdx}
+                      className="flex items-center gap-2 text-sm text-app-text-muted"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-app-brand shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
+
+        {/* Action Footer */}
+        <div className="mt-16 flex justify-center">
+          <motion.a
+            href="#contact"
+            variants={microInteractive}
+            whileHover="hover"
+            whileTap="tap"
+            className="inline-flex items-center gap-2 text-base font-bold text-app-heading underline decoration-app-brand decoration-2 underline-offset-4 hover:text-app-brand transition-colors duration-200"
+          >
+            View all services
+            <ArrowRight className="w-5 h-5" />
+          </motion.a>
+        </div>
       </div>
     </section>
   );

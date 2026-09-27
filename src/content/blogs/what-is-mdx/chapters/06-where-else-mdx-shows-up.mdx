@@ -1,0 +1,16 @@
+---
+title: "Where Else MDX Shows Up"
+order: 6
+---
+
+Everything so far has been about one blog. Worth knowing, briefly, that this same idea shows up all over the place — so if any of these sound interesting, that's your cue to go dig further on your own.
+
+**Documentation sites.** Frameworks like Docusaurus, Next.js-based doc sites, and Astro's own documentation tooling are largely built on exactly this pattern — prose files that can drop in a live example, a custom callout box, or an interactive demo right where the explanation needs it.
+
+**Component libraries.** Storybook — the tool many teams use to build and preview UI components in isolation — supports writing long-form documentation _and_ live component previews in the same MDX file. A designer or engineer reads plain prose about a `Checkbox` component, and a real, working checkbox renders right there in the page.
+
+**Static site frameworks generally.** Astro ships an official MDX integration; so does Next.js. The pattern generalizes past React specifically — MDX compiles down to a format multiple frameworks can consume.
+
+**What it's genuinely not built for** — worth knowing so you don't reach for it in the wrong place: content that users author live, at runtime — a CMS, a forum, a chat app. MDX needs a build step; you wouldn't want to ship its compiler to a browser just to render a comment someone typed thirty seconds ago. Plain Markdown, rendered normally, is the right tool there.
+
+That's the pointer list. Documentation tools, design systems, other static frameworks — each one is its own rabbit hole worth an afternoon if it's relevant to what you're building. For this blog specifically, though, the answer stays simple: folders, a registry, a compiler, and a layout with a hole in it. Simple enough to explain in six chapters. Simple enough to actually maintain.

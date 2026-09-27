@@ -1,0 +1,92 @@
+---
+title: "How This Blog's Pipeline Actually Works"
+order: 4
+---
+
+Everything so far has been building toward this moment: not what MDX is, not why a backend was skipped — but the actual machine, the one currently serving the words you're reading right now. Four moving parts, working together. Let's take them apart one at a time.
+
+## Part 1 — A folder is the whole database
+
+There's no table anywhere in this system. Instead, every post gets a folder, and that folder _is_ the record:
+
+```
+public/blogs/<slug>/         → images, video thumbnails
+src/content/blogs/<slug>/    → the actual writing
+```
+
+Two folders, same name, doing two different jobs. The `public/` copy is servable directly as a URL the browser can request. The `content/` copy is never served as a raw file — it only gets read once, at build time, and turned into something else entirely: a real component.
+
+A short post is just one file. A longer one adds a `chapters/` folder:
+
+```
+src/content/blogs/my-post/
+  index.mdx
+  chapters/
+    01-setup.mdx
+    02-the-hard-part.mdx
+```
+
+The number prefix keeps files ordered for a human browsing the folder — but the _actual_ reading order comes from an `order` field inside each chapter's own frontmatter. Rename a file later, and the sequence still holds.
+
+![Two matching folder trees, public assets and content, joined by the same slug](/blogs/what-is-mdx/chapter4-folder-structure.jpeg)
+
+## Part 2 — The registry: the one manual step in the whole system
+
+```typescript
+export const blogRegistry = [{ slug: "what-is-mdx" }];
+```
+
+This is deliberately the only thing touched by hand. Write a post, finish it, walk away — it won't show up anywhere until its slug lands in this array _and_ its frontmatter says `status: "published"`. Two locks on the door, not one. That's what lets a post sit half-finished in its folder for weeks without ever risking going live by accident.
+
+## Part 3 — Turning files into real components
+
+This is the part doing the actual heavy lifting, and it's one function call:
+
+```typescript
+const postModules = import.meta.glob("/src/content/blogs/*/index.mdx", {
+  eager: true,
+});
+```
+
+At build time, Vite scans the filesystem for every path matching that pattern and compiles each `.mdx` file it finds into a genuine React component — not a string, not raw text, an actual component with a `default` export, ready to render like any other. `eager: true` loads all of them upfront rather than lazily; fine at the current scale, worth revisiting once the post count climbs into the hundreds.
+
+Frontmatter rides along for free, thanks to a small plugin (`remark-mdx-frontmatter`) that turns the `---` block at the top of each file into a named export sitting right next to `default`:
+
+```typescript
+const { default: PostComponent, frontmatter } = postModules[somePath];
+// frontmatter.title, frontmatter.date, frontmatter.summary — all just there
+```
+
+That's how the blog's list page gets a title, date, and summary for all 80 eventual posts without ever opening or rendering a single one of them.
+
+## Part 4 — One layout, content that swaps underneath it
+
+The routing follows a pattern you'll recognize if you've built nested UI before — one shell, one changing slot inside it:
+
+```typescript
+<Route path="/blog/:slug" element={<BlogPostLayout />}>
+  <Route index element={<BlogPostContent />} />
+  <Route path=":chapter" element={<BlogChapterContent />} />
+</Route>
+```
+
+`BlogPostLayout` renders the title, date, and the sidebar navigation exactly once. Its `<Outlet />` is the slot — either the post's intro or a specific chapter renders there, depending on the URL, without the surrounding page ever unmounting. Move from chapter 1 to chapter 2, and the header doesn't flicker or reset; only the content underneath it changes.
+
+![A persistent layout frame with an Outlet slot swapping between post intro and chapter content](/blogs/what-is-mdx/chapter4-routing-outlet.jpeg)
+
+## The last trick — custom tags that aren't really "Markdown"
+
+Plain Markdown already handles headings, bold text, links, images. For the handful of things it _can't_ do — a styled call-to-action, a video-with-thumbnail — a small provider maps a tag name straight to a real component:
+
+```mdx
+<CTA text="See the source" link="https://github.com/example" />
+```
+
+`MDXProvider` is what makes that resolution work — it hands the compiled MDX component a lookup table of `{ CTA, VideoLink, ... }`, so writing a new post never means touching component code. Just reference a tag that already exists, and it renders.
+
+That's the whole system. A folder, a registry entry, a glob, a layout with a hole in it. No server watching, no database polling — just files, compiled once, shipped as static output.
+
+<CTA
+  text="Go deeper on Vite's Glob Import in the official docs"
+  link="https://vitejs.dev/guide/features.html#glob-import"
+/>

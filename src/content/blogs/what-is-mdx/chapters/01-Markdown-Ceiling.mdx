@@ -1,0 +1,32 @@
+---
+title: "Markdown's Ceiling"
+order: 1
+---
+
+Picture this: it's 2004, and John Gruber — the guy behind the blog Daring Fireball — is sick of something most bloggers never even think to be sick of. He's writing HTML by hand. Every paragraph, wrapped in `<p>` tags. Every link, `<a href="">`. Every heading, `<h2>`. And when he goes back to proofread his own writing? He can barely see it under all the tags.
+
+So he did what any stubborn perfectionist does: he built his own fix. With a 17-year-old named Aaron Swartz acting as his sounding board, Gruber came up with a plain text format that stayed readable _before_ it ever touched HTML. No angle brackets cluttering your sentences. Just `**bold**` where you'd expect bold, `# Heading` where you'd expect a heading — text that looks like writing, not code. He called it Markdown.
+
+That one design choice — readable _as-is_, unrendered, raw — is the whole reason Markdown still exists twenty-plus years later, sitting underneath half the internet's technical writing.
+
+## But why not just... use Word?
+
+Fair question. Word documents and PDFs already existed in 2004, and they still do the job for plenty of writing. But try putting a `.docx` file into a code repository and watch what happens the moment two people edit it. Git — the tool developers use to track every change to their code — reads plain text line by line. Change one sentence in a Markdown file, and Git shows you exactly that sentence, side by side, old versus new. Change one sentence in a Word file, and Git shows you... nothing useful. A wall of binary noise. No diff, no history, no "here's what actually changed."
+
+Add to that: a `.docx` needs Word (or something pretending to be Word) to even open properly. A `.pdf` needs a viewer. A `.md` file needs literally nothing — Notepad opens it fine, a terminal can `cat` it fine, and it still looks like normal writing either way. For a developer who already lives in a text editor and a terminal, that's not a nice-to-have. That's the whole appeal.
+
+![Word and PDF files versus plain Markdown in version control](/blogs/what-is-mdx/chapter1-word-vs-md.jpeg)
+
+## So why does every project's README look the same?
+
+Here's the twist: the _README_ file is way older than Markdown. It's a Unix-era convention — a plain text note sitting at the top of a project, screaming "read this first" in all caps, because capital letters happen to sort above lowercase ones in a file listing. Developers have been leaving these notes since long before Git existed.
+
+What changed wasn't the README — it was the format inside it. Once GitHub started automatically rendering any file named `README.md` as a clean, formatted page, the pairing became unbeatable: the exact same file reads perfectly as plain text in a terminal, diffs cleanly next to the code it explains, and _also_ renders as a polished page the second someone opens it in a browser. One file, two audiences, zero extra work. That's why `README.md` became the default instead of `README.txt` or `README.docx` — nothing else pulls off that trick.
+
+## And then it hits a wall
+
+For all of that, though, Markdown was only ever built to format text. Headings, bold, links, lists — that's the ceiling, and it's a hard one. Want a styled button that links out? A video thumbnail that behaves consistently across every post? A live chart sitting inside your writing? Markdown has no answer. It has no concept of logic, no way to accept input, no way to render anything that isn't the exact same static text every single time.
+
+You could cheat with raw HTML dropped into the middle of your Markdown — but that's clunky, unstyled by default, and still can't run real component logic. Before long, developers wanting exactly that ended up writing JSX inside giant JavaScript template strings just to sneak a real component into their content. It worked. Nobody enjoyed it.
+
+That gap — Markdown's simplicity, missing any way to drop in something _alive_ — is exactly the hole MDX was built to fill.

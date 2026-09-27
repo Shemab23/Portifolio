@@ -1,73 +1,66 @@
-export interface WorkHeaderData {
-  label: string;
-  headline: string;
-  intro: string;
-}
+// refine
 
-export interface ClientWorkItem {
-  slug: string;
-  title: string;
-  client?: string; // "Primerica Canada" / "AI Bootcamp" / "IANE's Travel & Tours"
+export interface Experience {
+  organization: string;
   role: string;
-  period: string; // "2026"
-  summary: string; // 1–2 lines
-  approach?: string; // what you actually did
-  outcome?: string; // what they got
-  stack?: string[]; // optional — not all client work is code
-  links?: {
-    live?: string;
-    source?: string;
-    drive?: string;
-  };
+  year: string;
+  description: string;
+  skills: string[];
 }
 
-export interface PracticeItem {
-  slug: string;
-  title: string;
+export interface OtherWork {
+  organization: string;
   role: string;
-  period: string;
-  status: "free" | "in-use" | "discontinued" | "archived";
-  statusNote?: string; // short honest line
-  summary: string;
-  approach?: string;
-  outcome?: string;
-  learned?: string;
-  stack?: string[];
-  links?: {
-    live?: string;
-    source?: string;
-    blog?: string;
-  };
+  year: string;
+  note: string;
 }
 
-export interface ToolItem {
-  slug: string;
-  title: string;
+export interface CTA {
+  text: string;
+  link: string;
+}
+
+const Types = [
+  "Web & App Development",
+  "AI & Automation",
+  "Digitizing Manual Processes",
+  "Design & Branding",
+  "Code Reviews, QA & Mentorship",
+] as const;
+
+export type ServiceType = (typeof Types)[number];
+
+export type ProjectStatus = "live" | "discontinued" | "published" | "completed";
+
+export interface Project {
+  image?: string; // optional — renders placeholder if absent
+  name: string;
   role: string;
-  period: string;
-  summary: string;
-  approach?: string;
-  outcome?: string;
-  builtFor?: string; // "For myself" | "For a small business in Zambia" etc.
-  stack?: string[];
-  links?: {
-    live?: string; // e.g., npm package page
-    source?: string;
-    blog?: string;
-  };
+  type: ServiceType;
+  year: string;
+  description: string;
+  tools: string[];
+  status?: ProjectStatus;
+  previewLink?: string; // live/demo URL — shows the hover "Preview" overlay
+  codeLink?: string; // repo URL — shows the "</>" link beneath the card
 }
 
-export interface OtherWorkItem {
-  slug: string;
-  title: string;
-  role: string;
-  period: string;
-  location?: string; // "Northern Cyprus" etc.
-  summary: string; // what the work was
-  reflection?: string; // why it matters / what it taught
+export interface ProjectsSectionProps {
+  projects: Project[];
+  cta: { text: string; link: string };
 }
 
-export interface WorkClosingData {
-  line: string;
-  link: { label: string; href: string };
+export interface ExperienceSectionProps {
+  experiences: Experience[];
+}
+
+export interface OtherWorkSectionProps {
+  items: OtherWork[];
+}
+
+export interface ClosingActionData {
+  heading: string;
+  subtext: string;
+  ctaText: string;
+  ctaLink: string;
 }

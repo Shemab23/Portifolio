@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type Theme = "light" | "dark";
 
@@ -6,6 +13,8 @@ const ThemeContext = createContext<{
   theme: Theme;
   toggle: () => void;
   logo: string;
+  contactOpen: boolean;
+  setContactOpen: Dispatch<SetStateAction<boolean>>;
 } | null>(null);
 
 const STORAGE_KEY = "theme";
@@ -30,12 +39,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const logo =
     theme === "dark" ? "images/logo-light.png" : "images/logo-dark.png";
 
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
+
   return (
     <ThemeContext.Provider
       value={{
         theme,
         toggle: () => setTheme((t) => (t === "light" ? "dark" : "light")),
         logo,
+        contactOpen,
+        setContactOpen,
       }}
     >
       {children}

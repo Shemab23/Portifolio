@@ -1,34 +1,130 @@
 import {
-  ClientWorkItem,
-  OtherWorkItem,
-  PracticeItem,
-  ToolItem,
-  WorkClosingData,
-  WorkHeaderData,
+  ClosingActionData,
+  Experience,
+  OtherWork,
+  Project,
 } from "@/types/work";
 
-export const workHeader: WorkHeaderData = {
-  label: "Work",
-  headline:
-    "Everything I've built, shipped, or done that produced something for someone.",
-  intro:
-    "Client work, practice projects, tools I built for myself and others, and the side jobs that kept me going while studying abroad. Each one is labelled honestly — no overclaiming.",
-};
-
-export const clientWork: ClientWorkItem[] = [
+export const projects: Project[] = [
   {
-    slug: "primerica-canada",
-    title: "Content Strategy & 5-Piece Campaign",
-    client: "Primerica Canada",
+    image: "/home/IANE'sTravelTour.png",
+    name: "IANE's Travel & Tours",
+    role: "Web Developer",
+    type: "Web & App Development",
+    year: "2026",
+    description:
+      "Built a travel booking website from scratch for a Kigali-based travel agency operating across East Africa and internationally — covering flights, tours, visa assistance, hotels, insurance, and airport transfers, with a colour system drawn from the company's own logo. The business now has a live site to present its services and take enquiries.",
+    tools: ["TypeScript", "React", "Tailwind CSS v4", "shadcn/ui"],
+    status: "live",
+    previewLink: "https://iane-s-travel-tour-black.vercel.app/",
+    codeLink: "https://github.com/Shemab23/IANE-STravel-Tour",
+  },
+  {
+    image: "/home/Ai-skill-Lab.png",
+    name: "AI Skill Lab",
+    role: "Software Developer",
+    type: "AI & Automation",
+    year: "2026",
+    description:
+      "Designed and built the public website for the AI bootcamp I was attending, using the same multi-model AI workflow the programme taught, refined by hand. A high-fidelity landing page, syllabus tracker, and responsive layout gave the bootcamp a public presence it didn't have before.",
+    tools: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
+    status: "completed",
+    previewLink: "https://ai-skills-lab.vercel.app/",
+    codeLink: "https://github.com/Shemab23/AI-skills-Lab",
+  },
+  {
+    image: "/home/easy-invoice.png",
+    name: "Easy Invoice",
+    role: "Founder & Developer",
+    type: "Digitizing Manual Processes",
+    year: "2025–2026",
+    description:
+      "A free invoicing tool for small businesses that turns quotations into structured invoices, with a calculation layer that handles conditional taxes, discounts, and client fees correctly. Built end to end — from data model to the forms people actually use — and it's free and in active use today.",
+    tools: ["TypeScript", "React", "Next.js", "Firebase", "Tailwind CSS"],
+    status: "live",
+    previewLink: "https://easy-invoice-ltd.vercel.app/",
+    codeLink: "https://github.com/Shemab23/EasyInvoiceLtd",
+  },
+  {
+    image: "/home/model.jpeg",
+    name: "Garment Prompt Bank",
+    role: "Prompt Designer",
+    type: "Design & Branding",
+    year: "2026",
+    description:
+      "A staged AI prompt pipeline built for a small garment business in Zambia — it takes one ordinary garment photo, sharpens it, and generates a full set of multi-angle, model-ready product shots. It cuts out the studio shoot and the hours of Photoshop retouching the business used to need for every new item.",
+    tools: ["Prompt Engineering", "Image Generation"],
+    status: "completed",
+    previewLink:
+      "https://drive.google.com/drive/folders/1CQBMI-KomOha-BLcG1cBupFyerv8A1SJ?usp=sharing",
+  },
+  {
+    image: "/home/brand-campaign.png",
+    name: "Brand Campaign & Content Kit",
+    role: "Brand & Marketing Designer",
+    type: "Design & Branding",
+    year: "2026",
+    description:
+      "A full brand and marketing exercise from the AI bootcamp — a photoshoot campaign, social posts, a flyer, a storyboard, and a brand book, built using Pomelli, Canva, and CapCut. It's the same marketing-and-branding skill set behind the Garment Prompt Bank, applied here to a complete campaign rather than a single product workflow.",
+    tools: ["Pomelli", "Canva", "CapCut"],
+    status: "completed",
+    previewLink:
+      "https://drive.google.com/drive/folders/1BJDPW7Lufu-i3X4VkUDoY9d9wVE2d5aM?usp=drive_link",
+  },
+  {
+    image: "/home/tumagreen.jpeg",
+    name: "TumaGreen",
+    role: "Full-Stack Developer",
+    type: "Web & App Development",
+    year: "2025",
+    description:
+      "A real-time delivery and logistics platform built for Rwanda, with live map tracking, shortest-path routing, and automatic pricing based on distance and load. The company paused the product before launch, so it never shipped — but the mapping, routing, and pricing logic were fully built and working.",
+    tools: [
+      "JavaScript",
+      "React",
+      "Express.js",
+      "Sequelize",
+      "Leaflet",
+      "Cloudinary",
+    ],
+    status: "discontinued",
+    codeLink: "https://github.com/Shemab23/TumaGreen",
+    previewLink: "https://youtu.be/m0RDA14YKTA",
+  },
+  {
+    image: "/home/NobelSource.png",
+    name: "Nobel Source",
+    role: "Founder & Lead Developer",
+    type: "Digitizing Manual Processes",
+    year: "2025–2026",
+    description:
+      "My graduation project: an agricultural marketplace concept connecting smallholder farmers directly with buyers, aimed at cutting out unnecessary middlemen and improving price transparency for resource-limited farming communities. Completed as a two-semester project, earning an A in the final term.",
+    tools: ["Software Engineering", "System Design"],
+    status: "completed",
+    codeLink: "https://github.com/Shemab23/NobelSource",
+    previewLink: "https://youtu.be/WGIxNCtv6RM",
+  },
+  {
+    name: "React Starter",
+    role: "Author & Maintainer",
+    type: "Code Reviews, QA & Mentorship",
+    year: "2026",
+    description:
+      "My own opinionated starter for new React projects, published to npm so it's installable from the terminal rather than copied from a repo each time. Built so I can go from a blank folder to a running project in minutes, with the setup choices I trust.",
+    tools: ["TypeScript", "React", "npm"],
+    status: "published",
+    codeLink: "https://github.com/Shemab23/react-starter",
+  },
+];
+
+export const experience: Experience[] = [
+  {
+    organization: "Primerica Canada",
     role: "Content Consultant",
-    period: "2026",
-    summary:
-      "Proposed a different way to manage content — creating it from recent events rather than a fixed calendar.",
-    approach:
-      "Designed a lightweight content approach tied to current events, then produced five platform-specific pieces across LinkedIn, TikTok, and Instagram — each written in the tone that fits the platform and audience.",
-    outcome:
-      "A ready-to-publish set of five pieces and a repeatable method the team could continue using.",
-    stack: [
+    year: "2026",
+    description:
+      "Proposed a shift from a fixed content calendar to a lighter, event-driven approach — creating content around what was actually happening rather than a preset schedule. Delivered five platform-specific pieces across LinkedIn, TikTok, and Instagram, each written for that platform's tone, plus a repeatable method the team kept using after I was done.",
+    skills: [
       "Content Strategy",
       "Copywriting",
       "LinkedIn",
@@ -37,155 +133,42 @@ export const clientWork: ClientWorkItem[] = [
     ],
   },
   {
-    slug: "ai-skills-lab",
-    title: "AI Skills Lab — Bootcamp Website",
-    client: "AI Bootcamp (Summer Edition)",
-    role: "Software Developer",
-    period: "2026",
-    summary:
-      "Designed and built the website for the AI bootcamp I was attending — using exactly what they taught us.",
-    approach:
-      "Built the site with multi-model AI orchestration alongside manual refinement: a high-fidelity landing page, syllabus tracking timeline, and content-dense responsive layout.",
-    outcome:
-      "The bootcamp got a public-facing website they didn't have before.",
-    stack: [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "AI Orchestration",
-    ],
+    organization: "European University of Lefke",
+    role: "Lab Assistant, Computer Programming & OOP",
+    year: "2024–2026",
+    description:
+      "Supported 150+ students across programming labs — grading assignments, running practical exercises, and helping students work through C, C++, object-oriented programming, memory management, and algorithms.",
+    skills: ["C", "C++", "OOP", "Debugging", "Mentorship"],
   },
   {
-    slug: "ianes-travel",
-    title: "IANE's Travel & Tours",
-    client: "IANE's Travel & Tours",
-    role: "Web Developer",
-    period: "2026",
-    summary:
-      "A travel booking site built from the ground up, with a custom colour system derived from the brand logo.",
-    approach:
-      "Built with React, Tailwind CSS v4, and shadcn/ui. Derived a full light/dark colour palette from the brand's sky-blue, sunrise-yellow, and army-green. Structured the site around the services the business actually offers — flights, tours, visa assistance, hotels, travel insurance, airport transfers.",
-    outcome:
-      "A live site the business can use to present its services and receive enquiries.",
-    stack: ["TypeScript", "React", "Tailwind CSS v4", "shadcn/ui"],
-    links: {
-      source: "https://github.com/Shemab23/IANE-STravel-Tour",
-    },
+    organization: "European University of Lefke",
+    role: "International Student Orientation Team",
+    year: "2025",
+    description:
+      "Supported over 200 incoming international students through onboarding during the Fall 2025 intake, working full-time hours through the intake period in a fast-paced, high-volume environment.",
+    skills: ["Coordination", "Student Support"],
   },
 ];
 
-export const practice: PracticeItem[] = [
+export const otherwork: OtherWork[] = [
   {
-    slug: "easy-invoice",
-    title: "Easy Invoice",
-    role: "Software Developer",
-    period: "2026",
-    status: "free",
-    statusNote: "Free to use — open in active use.",
-    summary:
-      "An invoicing tool for small businesses: quotations, invoices, configurable taxes, discounts, and client fees.",
-    approach:
-      "Designed and launched an MVP that simplifies quotation and invoice creation, with a flexible calculation layer supporting conditional tax rates, discounts, and additional client fees.",
-    outcome:
-      "Free and in active use. Built as practice to learn the full invoicing loop end-to-end — from data model to calculation rules to user-facing forms.",
-    learned:
-      "How to translate fuzzy business rules (tax, discount, fee ordering) into a predictable calculation engine.",
-    stack: ["TypeScript", "React", "Next.js", "Firebase", "Tailwind CSS"],
+    organization: "Northern Cyprus",
+    role: "Seasonal Farm Labourer",
+    year: "2022–2024",
+    note: "Planting, harvesting, and general farm labour during term breaks, alongside full-time studies.",
   },
   {
-    slug: "tumagreen",
-    title: "TumaGreen",
-    role: "Full-Stack Developer",
-    period: "2025",
-    status: "discontinued",
-    statusNote: "Discontinued — the company did not proceed with the product.",
-    summary:
-      "A real-time delivery and logistics platform localized for Rwanda, with live mapping and auto-calculated pricing.",
-    approach:
-      "Built full-stack delivery flows connecting live Leaflet maps, secure database transactions, and cloud-hosted asset handling. Implemented shortest-path routing and automatic price derivation from distance and load.",
-    outcome:
-      "Not shipped — the company paused the product before launch. The build itself is intact: mapping, routing, and pricing logic all work.",
-    learned:
-      "How to connect geospatial data, routing algorithms, and business pricing rules in one system — and how project outcomes depend on more than code.",
-    stack: [
-      "JavaScript",
-      "React",
-      "Express.js",
-      "Sequelize",
-      "Leaflet",
-      "Cloudinary",
-    ],
-    links: {
-      source: "https://github.com/Shemab23/TumaGreen",
-    },
+    organization: "Northern Cyprus",
+    role: "Kitchen & Floor Staff",
+    year: "2023–2024",
+    note: "Kitchen prep, service, and closing shifts at a restaurant, fitted around coursework.",
   },
 ];
 
-export const tools: ToolItem[] = [
-  {
-    slug: "react-starter",
-    title: "React Starter",
-    role: "Author & Maintainer",
-    period: "2026",
-    summary:
-      "A published npm starter — my own baseline for new React projects.",
-    approach:
-      "Built the way production teams build their own starters: a clean, opinionated setup that I can pull into any new project and have running in minutes, instead of rebuilding the same configuration every time.",
-    outcome:
-      "Published to npm and available from the terminal — installable as a starting point rather than copied from a repo.",
-    builtFor: "For myself — and anyone who needs the same baseline.",
-    stack: ["TypeScript", "React", "npm"],
-    links: {
-      // source: "https://github.com/Shemab23/react-starter",
-      // live: "https://www.npmjs.com/package/your-package-name",
-    },
-  },
-  {
-    slug: "garment-prompt-bank",
-    title: "Garment Prompt Bank",
-    role: "Prompt Designer",
-    period: "2026",
-    summary:
-      "A staged prompt pipeline that turns a blurry garment photo into a full multi-angle modelling set.",
-    approach:
-      "Designed a sequenced prompt flow: upscale the reference image, extract the garment from any angle, place it on a model in a chosen pose and palette — so a real-world garment can be modelled without a studio shoot.",
-    outcome:
-      "Removed the Photoshop time and cost from a small clothing business's preview workflow. Instead of hours of manual retouching, they pick a garment photo and get modelling shots in multiple angles.",
-    builtFor: "For a small garment business in Zambia.",
-    stack: ["Prompt Engineering", "Image Generation"],
-    links: {
-      blog: "#", // blog entry pending
-    },
-  },
-];
-
-export const otherWork: OtherWorkItem[] = [
-  {
-    slug: "farm-work",
-    title: "Farm work",
-    role: "Seasonal labourer",
-    period: "2022 — 2024",
-    location: "Northern Cyprus",
-    summary:
-      "Seasonal farm work alongside my studies — planting, harvesting, and general labour during term breaks.",
-    reflection:
-      "It kept me housed and fed while I studied. It also taught me what steady, physical work feels like when there's no deadline, no ticket, and no one watching.",
-  },
-  {
-    slug: "restaurant-work",
-    title: "Restaurant work",
-    role: "Kitchen & floor",
-    period: "2023 — 2024",
-    location: "Northern Cyprus",
-    summary:
-      "Shift work in a restaurant — kitchen prep, service, and closing shifts — fitted around coursework.",
-    reflection:
-      "Working under pressure with people who don't care what you're studying — only whether the food goes out and the table is clean — is a kind of training that no course covers.",
-  },
-];
-
-export const workClosing: WorkClosingData = {
-  line: "This page is what I've done. The story behind it is longer.",
-  link: { label: "Read my story", href: "/about" },
+export const closingAction: ClosingActionData = {
+  heading: "Let's build something worth shipping.",
+  subtext:
+    "I'm looking for my first full-time role as a software developer — open to remote, hybrid, or on-site. If you've read this far, you already know what I can do. Let's talk about what you're building.",
+  ctaText: "Get in touch",
+  ctaLink: "mailto:your-email@example.com",
 };

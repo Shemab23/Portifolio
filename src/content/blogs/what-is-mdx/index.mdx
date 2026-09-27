@@ -1,0 +1,22 @@
+---
+title: "What MDX Actually Is (And Why This Blog Doesn't Have a Backend)"
+date: "2026-09-26"
+status: "published"
+image: "cover.jpeg"
+summary: "What MDX actually is, why it exists, and why a personal blog can run entirely without a backend using it."
+tags: ["mdx", "react", "vite", "no-backend"]
+---
+
+I asked myself what MDX actually was, and my first answer was close but not quite right: "Markdown that works with React components." That's the right instinct — but it's worth being precise, the same way `TSX` isn't just "programmable TypeScript," it's specifically TypeScript with JSX support. `MDX` follows the same logic: Markdown with JSX support.
+
+This post is the explanation I wish I'd had going in — what MDX actually is, why it exists, why a personal blog can run entirely without a backend using it, and how the pipeline behind this exact blog works under the hood.
+
+![MDX as the merge of plain Markdown and JSX components](/blogs/what-is-mdx/cover.jpeg)
+
+By the end, you'll understand:
+
+- What MDX is, precisely, and when it was created
+- Why a static, no-backend blog is a legitimate architecture choice, not a shortcut
+- How this blog's actual pipeline — folders, a registry, build-time compilation, routing — fits together
+- How to build a small working version yourself
+- Where else MDX shows up, so you know where to look next

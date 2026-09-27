@@ -3,81 +3,75 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { nav } from "@/data/Navigation";
 import { useTheme } from "@/context/ThemeContext";
+import { X, Menu } from "lucide-react";
+
+const PhoneNav = () => {
+  return (
+    <div className="h-69 w-auto relative top-0 right-0 bg-green-300"></div>
+  );
+};
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { contactOpen, setContactOpen } = useTheme();
+  const [open, setOpen] = useState<boolean>(false);
   const { theme, toggle } = useTheme();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  const isHome = pathname === "/";
-  const ctaHref = isHome ? nav.cta.href : `/${nav.cta.href}`;
+  const ToggleMenu = (state: boolean) => {
+    setOpen(state);
+  };
 
   return (
     <header
       className={cn(
-        "sticky inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "border-b border-app-border bg-app-bg/80 backdrop-blur-md"
-          : "border-b border-transparent",
+        "z-50 text-md sticky top-0 transition-all duration-300 bg-secondary",
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Left — name */}
-        <Link
-          to={nav.homeHref}
-          className="text-sm font-semibold tracking-tight text-app-heading"
-        >
-          {nav.name}
+        <Link to={nav.homeHref} className="flex flex-col">
+          <span className="tracking-tight font-extrabold text-lg md:text-xl">
+            {nav.name}
+          </span>
+          <span className="text-sm italic text-app-text-muted">
+            {nav.position}
+          </span>
         </Link>
 
         {/* Center — desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-4 md:gap-12 md:flex">
           {nav.items.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
               className={({ isActive }) =>
                 cn(
-                  "text-sm transition-colors",
+                  "font-bold",
                   isActive
-                    ? "text-app-heading"
-                    : "text-app-text-muted hover:text-app-heading",
+                    ? "text-app-heading underline underline-offset-3 "
+                    : "text-app-heading/70 hover:text-app-heading",
                 )
               }
             >
               {item.label}
             </NavLink>
           ))}
+          <button
+            type="button"
+            onClick={() => setContactOpen(true)}
+            className="font-bold text-app-heading/70 hover:text-app-heading"
+          >
+            Contact
+          </button>
         </nav>
 
         {/* Right — CTA, theme toggle, mobile menu toggle */}
         <div className="flex items-center gap-2">
-          {/* Desktop CTA */}
-          <a
-            href={ctaHref}
-            className="hidden rounded-lg border border-app-border px-4 py-1.5 text-md font-medium text-app-text transition-colors hover:bg-[var(--secondary)] md:inline-flex"
-          >
-            {nav.cta.label}
-          </a>
-
           {/* Theme toggle — all screen sizes */}
           <button
             type="button"
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-app-border text-app-text transition-colors hover:bg-[var(--secondary)]"
+            className="flex h-9 w-9 items-center justify-center rounded-md border border-app-border text-app-text transition-colors hover:bg-secondary"
           >
             {theme === "dark" ? (
               <svg
@@ -114,65 +108,43 @@ export function Nav() {
             type="button"
             aria-label="Toggle menu"
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-app-border text-app-text md:hidden"
+            onClick={() => ToggleMenu(!open)}
+            className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-md border border-app-border text-app-text md:hidden hover:border-4 hover:border-app-brand-border"
           >
-            <span className="relative block h-3 w-4">
-              <span
-                className={cn(
-                  "absolute left-0 top-0 h-px w-full bg-current transition-transform",
-                  open && "translate-y-1.5 rotate-45",
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 top-1.5 h-px w-full bg-current transition-opacity",
-                  open && "opacity-0",
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 top-3 h-px w-full bg-current transition-transform",
-                  open && "-translate-y-1.5 -rotate-45",
-                )}
-              />
-            </span>
+            {open ? <X /> : <Menu />}
           </button>
         </div>
       </div>
 
-      {/* Mobile overlay */}
-      <div
-        className={cn(
-          "overflow-hidden border-t border-app-border bg-app-bg transition-[max-height] duration-300 md:hidden",
-          open ? "max-h-96" : "max-h-0",
-        )}
-      >
-        <nav className="flex flex-col gap-1 px-6 py-4">
-          {nav.items.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  "rounded-md px-3 py-2 text-sm transition-colors",
-                  isActive
-                    ? "bg-[var(--secondary)] text-app-heading"
-                    : "text-app-text-muted hover:bg-[var(--secondary)] hover:text-app-heading",
-                )
-              }
+      {open && (
+        <div className="md:hidden absolute top-16 right-0 h-auto w-1/2  bg-sidebar-accent/80 rounded-b-md font-bold text-lg text-app-text flex flex-col gap-2">
+          <nav className="flex flex-col gap-1 px-6 py-4">
+            {nav.items.map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    "rounded-md px-3 py-2 text-sm transition-colors",
+                    isActive
+                      ? "bg-secondary text-app-heading"
+                      : "text-app-text-muted hover:bg-secondary hover:text-app-heading",
+                  )
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <button
+              type="button"
+              onClick={() => setContactOpen(true)}
+              className="font-bold text-app-heading/70 hover:text-app-heading"
             >
-              {item.label}
-            </NavLink>
-          ))}
-          <a
-            href={ctaHref}
-            className="mt-2 rounded-md bg-[var(--contrast)] px-3 py-2 text-sm font-medium text-[var(--bg)]"
-          >
-            {nav.cta.label}
-          </a>
-        </nav>
-      </div>
+              Contact
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

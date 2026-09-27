@@ -1,9 +1,11 @@
+import { useTheme } from "@/context/ThemeContext";
 import { footer } from "@/data/Navigation";
 import { Link } from "react-router-dom";
 
 export function Footer() {
+  const { contactOpen, setContactOpen } = useTheme();
   return (
-    <footer className="border-t border-app-border">
+    <footer className="border-t border-app-border bg-secondary">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Identity */}
@@ -21,7 +23,7 @@ export function Footer() {
             <span className="text-xs uppercase tracking-wider text-app-text-muted">
               Pages
             </span>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 items-start">
               {footer.routes.map((r) => (
                 <li key={r.href}>
                   <Link
@@ -32,6 +34,16 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {/* Wrap the button in an li and match styles exactly */}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setContactOpen(true)}
+                  className="text-sm text-app-text transition-colors hover:text-app-brand text-left bg-transparent p-0 border-0 cursor-pointer block"
+                >
+                  Contact
+                </button>
+              </li>
             </ul>
           </div>
 

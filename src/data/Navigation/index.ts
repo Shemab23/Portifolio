@@ -2,13 +2,13 @@ import { FooterData, NavData } from "@/types/Navigation";
 
 export const nav: NavData = {
   name: "Bruno Shema",
+  position: "FullStack Software Engineer",
   homeHref: "/",
   items: [
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
-    // { label: "Learning", href: "/learning" },
+    { label: "Blog", href: "/blog" },
   ],
-  cta: { label: "Contact", href: "#contact" },
 };
 
 export const footer: FooterData = {

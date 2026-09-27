@@ -1,0 +1,24 @@
+---
+title: "Static vs. CMS: Why We Skipped One"
+order: 3
+---
+
+Chapter 2 ended on the fact that makes this whole blog possible: MDX compiles at build time, no runtime needed. That fact is also the whole reason this section exists — because the _normal_ way to build a blog looks nothing like that.
+
+## What a headless CMS actually is, under the hood
+
+Strip away the marketing language and a headless CMS is three things stacked together: a **database** that stores your content, an **admin panel** where you (or a client, or a team) edit that content through a UI instead of a code editor, and an **API** that hands the content over to whatever frontend asks for it — a website, a mobile app, anything. "Headless" just means the CMS has no built-in way of _displaying_ content itself; it only stores and serves it, and your frontend decides how it looks.
+
+That's a genuinely good architecture — for the right situation. Multiple non-technical people editing content daily, content that needs to reach several different apps at once, an editorial team that shouldn't need to touch code to fix a typo. A real, deliberate trade: you get a UI and structure, in exchange for running (or paying someone to run) a database and a live API.
+
+## Why that trade doesn't fit here
+
+None of that applies to a single-author, mostly-text blog: I write in a code editor already, there's no second editor needing a UI, and there's no other app needing to pull the same content. A database and a live API would be solving problems I don't have — at the cost of infrastructure I'd have to deploy, secure, and keep running.
+
+![Headless CMS architecture compared to this blog's build-time static approach](/blogs/what-is-mdx/chapter3-cms-vs-static.jpeg)
+
+## The actual alternative: skip the "live" part entirely
+
+That's the piece a CMS comparison usually skips: the meaningful difference isn't "database vs. no database" — it's **live vs. build-time**. A CMS-backed site asks a server "what's the content?" on every visit. This blog asks that question exactly once, at build time, and then ships the answer as a plain static file. No live component means no server to run, secure, or pay for.
+
+That's not a workaround or a smaller version of a "real" blog. It's the correct architecture for this specific job — folders of Markdown, compiled once, served as static output. The moment multiple writers, dynamic user-generated content, or another app needing the same content shows up, that's the moment a CMS becomes the right call again, not before.
