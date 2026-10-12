@@ -63,20 +63,6 @@ export default function WhatIDoSection() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Action Footer */}
-        <div className="mt-16 flex justify-center">
-          <motion.a
-            href="#contact"
-            variants={microInteractive}
-            whileHover="hover"
-            whileTap="tap"
-            className="inline-flex items-center gap-2 text-base font-bold text-app-heading underline decoration-app-brand decoration-2 underline-offset-4 hover:text-app-brand transition-colors duration-200"
-          >
-            View all services
-            <ArrowRight className="w-5 h-5" />
-          </motion.a>
-        </div>
       </div>
     </section>
   );

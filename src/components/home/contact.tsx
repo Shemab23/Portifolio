@@ -3,6 +3,7 @@ import { contactContent } from "@/data/home/profile";
 import { fadeInUp, microInteractive } from "@/lib/Motions";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+
 export default function ContactSection() {
   const { contactOpen, setContactOpen } = useTheme();
   return (

@@ -8,6 +8,9 @@ import {
   microInteractive,
 } from "@/lib/Motions";
 import { cardsSection } from "@/data/home/profile";
+import { Link } from "react-router-dom";
+
+const MotionLink = motion(Link);
 
 export function LabPlaceholder({
   name,
@@ -171,7 +174,7 @@ export default function SelectedWork() {
             className="inline-flex items-center gap-2 text-base font-bold text-app-heading underline decoration-app-brand decoration-2 underline-offset-4 hover:text-app-brand transition-colors duration-200"
           >
             {cardsSection.more.text}
-            <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4" />
           </motion.a>
         </motion.div>
       </div>

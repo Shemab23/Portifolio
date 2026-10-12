@@ -7,6 +7,9 @@ import {
 } from "@/lib/Motions";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const MotionLink = motion(Link);
 
 export default function HeroSection() {
   return (
@@ -39,8 +42,8 @@ export default function HeroSection() {
 
           {/* CTA Link */}
           <div className="pt-4">
-            <motion.a
-              href={heroContent.cta.link}
+            <MotionLink
+              to={heroContent.cta.link}
               variants={microInteractive}
               whileHover="hover"
               whileTap="tap"
@@ -48,7 +51,7 @@ export default function HeroSection() {
             >
               {heroContent.cta.text}
               <ArrowUpRight className="w-5 h-5 transition-transform duration-200" />
-            </motion.a>
+            </MotionLink>
           </div>
         </motion.div>
 
