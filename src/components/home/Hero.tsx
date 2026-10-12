@@ -7,8 +7,9 @@ import {
 } from "@/lib/Motions";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Clean React Router Import
 
+// Create a motion-enabled version of React Router's Link
 const MotionLink = motion(Link);
 
 export default function HeroSection() {
@@ -40,10 +41,10 @@ export default function HeroSection() {
             {heroContent.description}
           </p>
 
-          {/* CTA Link */}
+          {/* CTA Link - The correct client-side router way */}
           <div className="pt-4">
             <MotionLink
-              to={heroContent.cta.link}
+              to={heroContent.cta.link} // Uses 'to' instead of 'href' to avoid reloading
               variants={microInteractive}
               whileHover="hover"
               whileTap="tap"
