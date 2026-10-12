@@ -1,4 +1,4 @@
-import About from "@/components/home/About";
+import { About } from "@/pages/About";
 import { BlogPostLayout } from "@/Layouts/BlogPostLayout";
 import { MainLayout } from "@/Layouts/Main";
 import { Blog } from "@/pages/Blog";
